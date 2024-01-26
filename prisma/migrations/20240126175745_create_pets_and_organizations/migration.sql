@@ -17,6 +17,7 @@ CREATE TYPE "PetEnvironment" AS ENUM ('WIDE', 'MEDIUM', 'SMALL');
 CREATE TABLE "pets" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "city" TEXT NOT NULL,
     "description" TEXT,
     "adopted_at" TIMESTAMP(3),
     "adoption_requirements" TEXT DEFAULT '',
@@ -38,7 +39,7 @@ CREATE TABLE "organizations" (
     "responsible_name" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "cep" TEXT NOT NULL,
+    "postalCode" TEXT NOT NULL,
     "address" TEXT NOT NULL,
     "phone" TEXT NOT NULL,
     "password_hash" TEXT NOT NULL,
@@ -46,6 +47,15 @@ CREATE TABLE "organizations" (
 
     CONSTRAINT "organizations_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "organizations_title_key" ON "organizations"("title");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "organizations_email_key" ON "organizations"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "organizations_phone_key" ON "organizations"("phone");
 
 -- AddForeignKey
 ALTER TABLE "pets" ADD CONSTRAINT "pets_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "organizations"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

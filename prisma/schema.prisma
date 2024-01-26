@@ -43,6 +43,7 @@ enum PetEnvironment {
 model Pet {
   id                    String    @id @default(uuid())
   name                  String
+  city                  String
   description           String?
   adopted_at            DateTime?
   adoption_requirements String?   @default("")
@@ -65,11 +66,11 @@ model Pet {
 model Organization {
   id               String   @id @default(uuid())
   responsible_name String
-  title            String
-  email            String
-  cep              String
+  title            String   @unique
+  email            String   @unique
+  postalCode       String
   address          String
-  phone            String
+  phone            String   @unique
   password_hash    String
   created_at       DateTime @default(now())
 
