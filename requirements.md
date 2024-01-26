@@ -8,7 +8,7 @@ Find a Friend.
 - [ ] Deve ser possível listar todos os pets disponíveis para adoção em uma cidade
 - [ ] Deve ser possível filtrar pets por suas características
 - [ ] Deve ser possível visualizar detalhes de um pet para adoção
-- [ ] Deve ser possível se cadastrar como uma ORG
+- [x] Deve ser possível se cadastrar como uma ORG
 - [ ] Deve ser possível realizar login como uma ORG
 
 ## RNs (Regras de negócio)
@@ -22,36 +22,36 @@ Find a Friend.
 
 ## RNFs (Requisitos não-funcionais)
 
-- [ ] A senha do usuário precisa estar criptografada;
-- [ ] Os dados da aplicação precisam estar persistidos em um banco PostgreSQL;
+- [x] A senha da Organização precisa estar criptografada;
+- [x] Os dados da aplicação precisam estar persistidos em um banco PostgreSQL;
 - [ ] Todas listas de dados precisam estar paginadas com 20 itens por página;
-- [ ] A org deve ser identificada por um JWT (JSON Web Token);
+- [ ] A Organização deve ser identificada por um JWT (JSON Web Token);
 
-### Pet
+### Pet 
 {
-✅  id: string 
-✅  name: string
-✅  age: Filhote | Adulto | Idoso
-✅  EnergyLevel: 1, 2, 3, 4, 5
-✅  size: small | medium | large
-✅  independenceLevel: small | medium | large
-✅  <!-- imgUrl: string -->
-✅  type: Dog | Cat | Other
-✅  description: string
-✅ environment: Pequeno | médio | amplo
-✅  adoptionRequirements: string[]
-✅  adoption_date: string | null
-✅ org_id: Foreign key
+  id: string 
+  name: string
+  age: Filhote | Adulto | Idoso
+  EnergyLevel: 1, 2, 3, 4, 5
+  size: small | medium | large
+  independenceLevel: small | medium | large
+  <!-- imgUrl: string -->
+  type: Dog | Cat | Other
+  description: string
+  environment: Pequeno | médio | amplo
+  adoptionRequirements: string[]
+  adoption_date: string | null
+  org_id: Foreign key
 } 
 
 ### Org
 {
-✅ id: string
-✅ responsible_name: string
-✅ name: string
-✅ email: string
-✅ cep: string
-✅ address: string
-✅ phone: number
-✅ password_hash: string
+ id: string
+ responsible_name: string
+ name: string
+ email: string
+ cep: string
+ address: string
+ phone: number
+ password_hash: string
 }

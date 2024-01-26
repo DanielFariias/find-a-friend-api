@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "2.1.0",
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20.11.7",
     "eslint": "8.56.0",
     "prisma": "5.8.1",
