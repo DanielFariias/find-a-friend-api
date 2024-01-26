@@ -9,7 +9,7 @@ export class InMemoryOrganizationsRepository
 
   async create(data: Prisma.OrganizationCreateInput) {
     const organization: Organization = {
-      id: randomUUID(),
+      id: data.id ?? randomUUID(),
       responsible_name: data.responsible_name,
       title: data.title,
       email: data.email,
@@ -27,6 +27,16 @@ export class InMemoryOrganizationsRepository
 
   async findByEmail(email: string) {
     const org = this.items.find((org) => org.email === email)
+
+    if (!org) {
+      return null
+    }
+
+    return org
+  }
+
+  async findById(id: string) {
+    const org = this.items.find((org) => org.id === id)
 
     if (!org) {
       return null

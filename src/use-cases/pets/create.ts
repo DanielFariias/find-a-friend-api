@@ -6,49 +6,62 @@ import {
   PetType,
 } from '@prisma/client'
 import { IPetsRepository } from '../../repositories/pets-repository'
+import { IOrganizationsRepository } from '../../repositories/organizations-repository'
+import { OrganizationNotFoundError } from '../errors/organization.not-found'
 
 interface CreatePetUseCaseRequest {
   name: string
+  city: string
   organizationId: string
-  description?: string
-  adoptionRequirements?: string
   age?: PetAge
-  energyLevel?: number
-  size?: PetSize
-  independenceLevel?: PetIndependenceLevel
   type?: PetType
+  size?: PetSize
+  description?: string
+  energyLevel?: number
   environment?: PetEnvironment
+  independenceLevel?: PetIndependenceLevel
   adoptedAt?: Date
+  adoptionRequirements?: string
 }
 
 export class CreatePetUseCase {
-  constructor(private petsRepository: IPetsRepository) {}
+  constructor(
+    private petsRepository: IPetsRepository,
+    private organizationsRepository: IOrganizationsRepository,
+  ) {}
 
   async execute({
-    adoptionRequirements,
+    name,
+    city,
+    organizationId,
     age,
+    type,
+    size,
     description,
     energyLevel,
     environment,
     independenceLevel,
-    name,
-    size,
-    type,
-    organizationId,
     adoptedAt,
+    adoptionRequirements,
   }: CreatePetUseCaseRequest) {
+    const organization =
+      await this.organizationsRepository.findById(organizationId)
+
+    if (!organization) throw new OrganizationNotFoundError()
+
     const pet = await this.petsRepository.create({
       name,
       organization_id: organizationId,
+      city,
+      age,
+      type,
+      size,
+      description,
+      environment,
+      energy_level: energyLevel,
+      independence_level: independenceLevel,
       adopted_at: adoptedAt,
       adoption_requirements: adoptionRequirements,
-      age,
-      description,
-      energy_level: energyLevel,
-      environment,
-      independence_level: independenceLevel,
-      size,
-      type,
     })
 
     return { pet }
