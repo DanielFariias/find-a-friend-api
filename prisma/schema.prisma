@@ -22,7 +22,7 @@ enum PetSize {
   LARGE
 }
 
-enum IndependenceLevel {
+enum PetIndependenceLevel {
   LOW
   MEDIUM
   HIGH
@@ -41,19 +41,20 @@ enum PetEnvironment {
 }
 
 model Pet {
-  id                   String    @id @default(uuid())
-  name                 String
-  description          String?
-  adopted_at           DateTime?
-  adoptionRequirements String[]
-  created_at           DateTime  @default(now())
+  id                    String    @id @default(uuid())
+  name                  String
+  description           String?
+  adopted_at            DateTime?
+  adoption_requirements String?   @default("")
 
-  age               PetAge            @default(YOUNG)
-  energyLevel       Int               @default(3)
-  size              PetSize           @default(MEDIUM)
-  independenceLevel IndependenceLevel @default(MEDIUM)
-  type              PetType           @default(OTHER)
-  enviroment        PetEnvironment    @default(MEDIUM)
+  age                PetAge?               @default(YOUNG)
+  energy_level       Int?                  @default(3)
+  size               PetSize?              @default(MEDIUM)
+  independence_level PetIndependenceLevel? @default(MEDIUM)
+  type               PetType?              @default(OTHER)
+  environment        PetEnvironment?       @default(MEDIUM)
+
+  created_at DateTime? @default(now())
 
   org             Organization @relation(fields: [organization_id], references: [id])
   organization_id String

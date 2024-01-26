@@ -5,7 +5,7 @@ CREATE TYPE "PetAge" AS ENUM ('YOUNG', 'ADULT', 'OLD');
 CREATE TYPE "PetSize" AS ENUM ('SMALL', 'MEDIUM', 'LARGE');
 
 -- CreateEnum
-CREATE TYPE "IndependenceLevel" AS ENUM ('LOW', 'MEDIUM', 'HIGH');
+CREATE TYPE "PetIndependenceLevel" AS ENUM ('LOW', 'MEDIUM', 'HIGH');
 
 -- CreateEnum
 CREATE TYPE "PetType" AS ENUM ('CAT', 'DOG', 'OTHER');
@@ -19,14 +19,14 @@ CREATE TABLE "pets" (
     "name" TEXT NOT NULL,
     "description" TEXT,
     "adopted_at" TIMESTAMP(3),
-    "adoptionRequirements" TEXT[],
-    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "age" "PetAge" NOT NULL DEFAULT 'YOUNG',
-    "energyLevel" INTEGER NOT NULL DEFAULT 3,
-    "size" "PetSize" NOT NULL DEFAULT 'MEDIUM',
-    "independenceLevel" "IndependenceLevel" NOT NULL DEFAULT 'MEDIUM',
-    "type" "PetType" NOT NULL DEFAULT 'OTHER',
-    "enviroment" "PetEnvironment" NOT NULL DEFAULT 'MEDIUM',
+    "adoption_requirements" TEXT DEFAULT '',
+    "age" "PetAge" DEFAULT 'YOUNG',
+    "energy_level" INTEGER DEFAULT 3,
+    "size" "PetSize" DEFAULT 'MEDIUM',
+    "independence_level" "PetIndependenceLevel" DEFAULT 'MEDIUM',
+    "type" "PetType" DEFAULT 'OTHER',
+    "environment" "PetEnvironment" DEFAULT 'MEDIUM',
+    "created_at" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
     "organization_id" TEXT NOT NULL,
 
     CONSTRAINT "pets_pkey" PRIMARY KEY ("id")
