@@ -6,8 +6,6 @@ import {
   PetType,
 } from '@prisma/client'
 import { IPetsRepository } from '../../repositories/pets-repository'
-import { IOrganizationsRepository } from '../../repositories/organizations-repository'
-import { OrganizationNotFoundError } from '../errors/organization.not-found'
 import { ResourceIsRequired } from '../errors/resource-is-required'
 
 interface ListPetsUseCaseRequest {
