@@ -8,6 +8,7 @@ import {
 import { IPetsRepository } from '../../repositories/pets-repository'
 import { IOrganizationsRepository } from '../../repositories/organizations-repository'
 import { ResourceNotFoundError } from '../errors/resource.not-found'
+import { ResourceIsRequired } from '../errors/resource-is-required'
 
 interface CreatePetUseCaseRequest {
   name: string
@@ -44,6 +45,10 @@ export class CreatePetUseCase {
     adoptedAt,
     adoptionRequirements,
   }: CreatePetUseCaseRequest) {
+    if (!city) throw new ResourceIsRequired('City')
+    if (!name) throw new ResourceIsRequired('Name')
+    if (!organizationId) throw new ResourceIsRequired('Organization Id')
+
     const organization =
       await this.organizationsRepository.findById(organizationId)
 

@@ -4,6 +4,7 @@ import { CreatePetUseCase } from './create'
 import { InMemoryOrganizationsRepository } from '../../repositories/in-memory/in-memory-organizations-repository'
 import { hash } from 'bcryptjs'
 import { ResourceNotFoundError } from '../errors/resource.not-found'
+import { ResourceIsRequired } from '../errors/resource-is-required'
 
 let petsRepository: InMemoryPetsRepository
 let organizationRepository: InMemoryOrganizationsRepository
@@ -48,5 +49,15 @@ describe('Create Pet Use Case', () => {
         city: 'Any City',
       }),
     ).rejects.toBeInstanceOf(ResourceNotFoundError)
+  })
+
+  it('should not be able to create a pet without a city', async () => {
+    await expect(() =>
+      sut.execute({
+        name: 'Any Pet Name',
+        organizationId: 'any-organization-id-2',
+        city: '',
+      }),
+    ).rejects.toBeInstanceOf(ResourceIsRequired)
   })
 })
