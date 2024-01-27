@@ -7,7 +7,7 @@ import {
 } from '@prisma/client'
 import { IPetsRepository } from '../../repositories/pets-repository'
 import { IOrganizationsRepository } from '../../repositories/organizations-repository'
-import { OrganizationNotFoundError } from '../errors/organization.not-found'
+import { ResourceNotFoundError } from '../errors/resource.not-found'
 
 interface CreatePetUseCaseRequest {
   name: string
@@ -47,7 +47,7 @@ export class CreatePetUseCase {
     const organization =
       await this.organizationsRepository.findById(organizationId)
 
-    if (!organization) throw new OrganizationNotFoundError()
+    if (!organization) throw new ResourceNotFoundError()
 
     const pet = await this.petsRepository.create({
       name,
