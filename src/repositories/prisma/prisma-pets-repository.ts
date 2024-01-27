@@ -10,4 +10,24 @@ export class PrismaPetsRepository implements IPetsRepository {
 
     return pet
   }
+
+  async findByCity(city: string) {
+    const pet = await prisma.pet.findMany({
+      where: {
+        city,
+      },
+    })
+
+    return pet
+  }
+
+  async findById(id: string) {
+    const pet = await prisma.pet.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    return pet
+  }
 }
